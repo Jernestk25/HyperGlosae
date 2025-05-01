@@ -1,18 +1,13 @@
 import '../styles/DiscreeteDropdown.css';
 
 import { forwardRef } from 'react';
-import { Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { ThreeDotsVertical } from 'react-bootstrap-icons';
 
-function DiscreeteDropdown({ children }) {
+function DiscreeteDropdown({children}) {
 
-  const Toggle = forwardRef(({ onClick }, ref) => (
-    <OverlayTrigger
-      placement="top"
-      overlay={<Tooltip id="tooltip-edit-metadata">Edit metadata...</Tooltip>}
-    >
-      <ThreeDotsVertical className="toggle" {...{ onClick, ref }} />
-    </OverlayTrigger>
+  const Toggle = forwardRef(({onClick}, ref) => (
+    <ThreeDotsVertical className="toggle" {...{onClick, ref}} />
   ));
   Toggle.displayName = 'Toggle';
 
