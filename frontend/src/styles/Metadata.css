@@ -15,3 +15,28 @@
 .license a:hover {
   color: inherit;
 }
+
+.dropdown-menu-icon, .dropdown-toggle-icon {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.always-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.discreete-dropdown-toggle,
+.discreete-dropdown .dropdown-toggle {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
+
+.discreete-dropdown .three-dots-icon,
+.discreete-dropdown .dropdown-icon {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
+

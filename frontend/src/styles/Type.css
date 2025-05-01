@@ -13,3 +13,16 @@
     display: inline-block;
     word-break: break-word;
 }
+
+.dropdown-toggle::after,
+.dropdown-toggle .three-dots {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
+
+.always-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
