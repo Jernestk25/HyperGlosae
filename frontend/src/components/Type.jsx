@@ -3,7 +3,7 @@ import '../styles/Type.css';
 
 import { TagFill } from 'react-bootstrap-icons';
 import { useState, useContext } from 'react';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { TypesContext } from './TypesContext.js';
 
 export function TypeBadge({ type, addClassName }) {
@@ -11,7 +11,7 @@ export function TypeBadge({ type, addClassName }) {
   if (!type) return null;
   const typeSelected = types.find((t) => t.id === type);
   if (!typeSelected) return;
-  return <div style={{backgroundColor: typeSelected.doc.color}} className={`typeBadge ${addClassName ?? ''}`}>
+  return <div style={{ backgroundColor: typeSelected.doc.color }} className={`typeBadge ${addClassName ?? ''}`}>
     {typeSelected.doc.type_name}
   </div>;
 }
@@ -40,7 +40,7 @@ function TypeList({ typeSelected, handleUpdate }) {
             key={index}
             style={{ backgroundColor: type === typeSelected ? 'grey' : '' }}
             onClick={() => handleUpdate(type.id)}>
-            <TypeBadge type={type.id}/>
+            <TypeBadge type={type.id} />
           </ListGroup.Item>
         )}
         {typeSelected ?
@@ -57,9 +57,9 @@ function TypeList({ typeSelected, handleUpdate }) {
 }
 
 function Type({ metadata, editable, backend }) {
-  const [ beingEdited, setBeingEdited ] = useState(false);
-  const [ typeSelected, setTypeSelected ] = useState(metadata.type);
-  const [ editedDocument, setEditedDocument ] = useState(metadata);
+  const [beingEdited, setBeingEdited] = useState(false);
+  const [typeSelected, setTypeSelected] = useState(metadata.type);
+  const [editedDocument, setEditedDocument] = useState(metadata);
 
   const handleEdit = () => {
     setBeingEdited(!beingEdited);
@@ -80,11 +80,21 @@ function Type({ metadata, editable, backend }) {
   return (
     <div style={{ paddingTop: 10, paddingBottom: 30 }}>
       <div style={{ paddingTop: 0, justifyContent: 'flex-end' }}>
-        <TypeBadge addClassName="typeSelected" type={typeSelected}/>
-        {editable ? <TagFill onClick={handleEdit} className="icon typeIcon" title="Apply a label..."/> : null}
+        <TypeBadge addClassName="typeSelected" type={typeSelected} />
+        {editable ? (
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="tooltip-apply-label">Apply a label...</Tooltip>}
+          >
+            <TagFill
+              onClick={handleEdit}
+              className="icon typeIcon always-visible"
+            />
+          </OverlayTrigger>
+        ) : null}
       </div>
       {beingEdited ?
-        <TypeList typeSelected={typeSelected} handleUpdate={handleUpdate}/>
+        <TypeList typeSelected={typeSelected} handleUpdate={handleUpdate} />
         : null
       }
     </div>
